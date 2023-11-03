@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .fact {
+      opacity: 1;
+      transition: all ease-in 1s;
+    }
+    
+    .fact.htmx-added {
+      opacity: 0;
+    }
+
+    .fact.htmx-swapping {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="dog.html">Dog</a></li>
+        <li><a href="cat.html" hx-boost="true">Cat</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="content">
+      <button class="button"
+        hx-get="http://localhost:8080/api/dog-fact"
+        hx-trigger="click"
+        hx-swap="beforeend"
+        hx-target="#pool">
+        Give me a random 🐶 fact!
+      </button>
+      <div id="pool" class="pool">
+        <h1 class="title" _="on click toggle .red-color">Dog facts</h1>
+      </div>
+      <div class="link"
+        hx-get="hello.html"
+        hx-swap="innerHtml"
+        hx-target="#pool"
+        hx-trigger="click"
+        hx-push-url="/hello"
+      >Say Hello</div>
+    </div>
+  </main>
+  <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+</body>
+</html>
